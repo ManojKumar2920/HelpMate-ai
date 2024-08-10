@@ -15,6 +15,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState<{ type: string; text: string }[]>(
     []
   );
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,8 @@ const Chatbot = () => {
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+  
 
   const apiKey: any = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
 
@@ -79,12 +82,6 @@ const Chatbot = () => {
     }
   };
 
-  const handleKeyboardShortcut = (e: KeyboardEvent) => {
-    if (e.ctrlKey && e.shiftKey && e.key === "h") {
-      toggleModal();
-    }
-  };
-
   
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -96,17 +93,15 @@ const Chatbot = () => {
 
   return (
     <div>
-      <div className=" fixed bottom-10 right-10 z-50" onClick={toggleModal} onKeyDown={handleKeyboardShortcut}>
-        <div className=" flex items-center text-sm">
-          <p>Try the Chatbot</p>
-          <X />
-        </div>
+      <div className=" fixed bottom-10 right-10 z-50" onClick={toggleModal} >
+       
         <Image
           src={Logo}
           alt="HelpMate"
           width={50}
           className="rounded-full  shadow-lg cursor-pointer"
         />
+        
       </div>
 
       {isModalOpen && (
